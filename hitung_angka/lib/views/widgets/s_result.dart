@@ -1,18 +1,15 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:flutter/material.dart';
 import 'package:hitung_angka/data/data_number.dart';
 import 'package:hitung_angka/views/widgets/s_text.dart';
 
-class SLoading extends StatefulWidget {
-  int countDown;
-  SLoading({super.key, required this.countDown});
+class SResult extends StatefulWidget {
+  const SResult({super.key});
 
   @override
-  State<SLoading> createState() => _SLoadingState();
+  State<SResult> createState() => _SResultState();
 }
 
-class _SLoadingState extends State<SLoading> {
+class _SResultState extends State<SResult> {
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -20,7 +17,7 @@ class _SLoadingState extends State<SLoading> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SText(massage: "loading"),
+          SText(massage: "hasil:"),
           SText(massage: DataNumber.get().toString(), size: 96,),
         ],
       ),
