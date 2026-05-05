@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hitung_angka/data/data_number.dart';
+import 'package:hitung_angka/data/local_storage.dart';
 import 'package:hitung_angka/views/widgets/s_text.dart';
 
 class SResult extends StatefulWidget {
@@ -18,7 +18,7 @@ class _SResultState extends State<SResult> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SText(massage: "hasil:"),
-          SText(massage: DataNumber.get().toString(), size: 96,),
+          SText(massage: LocalStorage.number.toString(), size: 96,),
         ],
       ),
     );

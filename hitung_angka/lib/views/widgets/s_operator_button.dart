@@ -1,7 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:hitung_angka/data/data_number.dart';
+import 'package:hitung_angka/data/local_storage.dart';
 
 import 's_button.dart';
 
@@ -17,19 +17,19 @@ class _SOperatorButtonState extends State<SOperatorButton> {
 
   void subtract(){
     widget.state.setState(() {
-      DataNumber.subtract(1);
+      LocalStorage.add(-1);
     });
   }
 
   void addition(){
     widget.state.setState(() {
-      DataNumber.add(1);
+      LocalStorage.add(1);
     });
   }
 
   void reset(){
     widget.state.setState(() {
-      DataNumber.setTo(0);
+      LocalStorage.set(0);
     });
   }
 

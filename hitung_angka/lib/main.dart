@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hitung_angka/data/data_number.dart';
-import 'package:hitung_angka/data/local_storage.dart';
 import 'package:hitung_angka/views/pages/home.dart';
 
 void main() {
@@ -18,9 +16,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState(){
-    LocalStorage.init();
-    DataNumber.init();
-
     super.initState();
   }
 

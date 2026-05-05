@@ -1,7 +1,6 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:hitung_angka/data/data_number.dart';
 import 'package:hitung_angka/views/widgets/s_text.dart';
 
 class SLoading extends StatefulWidget {
@@ -21,7 +20,7 @@ class _SLoadingState extends State<SLoading> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SText(massage: "loading"),
-          SText(massage: DataNumber.get().toString(), size: 96,),
+          SText(massage: widget.countDown.toString(), size: 96,),
         ],
       ),
     );

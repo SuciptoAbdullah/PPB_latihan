@@ -2,19 +2,46 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalStorage
 {
+  static int number = 0;
+  
+  static bool declare = false;
   static SharedPreferences? pref;
 
   static Future<void> init() async{
-    LocalStorage.pref = await SharedPreferences.getInstance();
-    LocalStorage.pref?.setInt('data', 0);
+    if(!declare){
+      LocalStorage.pref = await SharedPreferences.getInstance();
+      int? data = LocalStorage.pref?.getInt('data');
+      if(data != null){
+        LocalStorage.number = data;
+      }
+      declare = true;
+
+    }
   }
 
-  static Future<void> setInt(String key, int value)async {
-    LocalStorage.pref?.setInt(key, value);
+  static Future<int> getNumber() async{
+    if(!declare){
+      await init();
+    }
+    int? data = LocalStorage.pref?.getInt('data');
+    if(data == null){
+      return 0;
+    }
+    return data;
   }
 
-  static Future<int?> getInt(String key) async {
-    return LocalStorage.pref?.getInt(key) ?? 0;
+  static void updateStorage(){
+    pref?.setInt('data', LocalStorage.number);
+  }
+
+  static void add(int value){
+    number += value;
+    updateStorage();
+  }
+
+  static void set(int value){
+    number = value;
+    updateStorage();
   }
 
 }

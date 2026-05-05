@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hitung_angka/data/data_number.dart';
+import 'package:hitung_angka/data/local_storage.dart';
 import 'package:hitung_angka/views/pages/result.dart';
-import 'package:hitung_angka/views/widgets/s_operator_button.dart';
-import 'package:hitung_angka/views/widgets/s_text.dart';
+import 'package:hitung_angka/views/widgets/s_input_number.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -25,24 +24,25 @@ class _HomeState extends State<Home> {
               color: Colors.pink[300],
               borderRadius: BorderRadius.circular(30)
             ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              spacing: 15,
-              children: [
-                SText(massage: "masukan nilai angka"),
-                SText(massage: DataNumber.number.toString(), size: 96),
-                SOperatorButton(state: this)
-              ]
-            ),
+            child: FutureBuilder(
+              future: LocalStorage.getNumber(),
+              builder: (context, snapshot){
+              if(snapshot.connectionState == ConnectionState.waiting){
+                return Text('loading...');
+              }
+              if(snapshot.hasError){
+                return Text('error');
+              }
+              return SInputNumber();
+            })
+            )
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(onPressed: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => Result(result: DataNumber.number,) ));
-      },
-      child: Icon(Icons.navigate_next_rounded),
-      ),
-    );
+        floatingActionButton: FloatingActionButton(onPressed: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context) => Result(result: LocalStorage.number,)));
+        },
+        child: Icon(Icons.next_week_rounded),
+        ),
+      );
   }
 }
